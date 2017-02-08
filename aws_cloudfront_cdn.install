@@ -1,0 +1,19 @@
+<?php
+
+/**
+ *  Implements hook_install().
+ *
+ *  Initially sets the cloudfront_last_invalidation variable.
+ */
+function aws_cloudfront_cdn_install() {
+  variable_set('cloudfront_last_invalidation',time());
+}
+
+/**
+ *  Implements hook_uninstall().
+ *
+ *  Delete the cloudfront_last_invalidation variable
+ */
+function aws_cloudfront_cdn_uninstall() {
+  variable_del('cloudfront_last_invalidation');
+}

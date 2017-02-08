@@ -1,0 +1,7 @@
+name = AWS CloudFront CDN
+description = Manage AWS CloudFront CDN invalidation through Drupal's administrative interface.
+core = 7.x
+features[features_api][] = api:1
+
+dependencies[] = media
+dependencies[] = file_entity

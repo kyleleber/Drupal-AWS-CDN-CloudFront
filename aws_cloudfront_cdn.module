@@ -1,0 +1,63 @@
+<?php
+ 
+/**
+ *  Implements hook_menu().
+ *
+ *  @returm Array
+ */
+function aws_cloudfront_cdn_menu(){
+	$items = array();
+  $items['admin/config/system/cdn_settings'] = array(
+    'title' => 'AWS Cloudfront',
+		'description' => 'View and Manage CDN assets',
+    'type' => MENU_NORMAL_ITEM,
+    'access arguments' => array('administer users'),
+  );
+  $items['admin/config/system/cdn_settings/key_configuration'] = array(
+		'title' => 'Key Configuration',
+		'description' => 'View and Manage Key Configuration',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('aws_cloudfront_key_settings'),
+		'access arguments' => array('administer users'),
+		'type' => MENU_NORMAL_ITEM,
+		'file' => 'aws_cloudfront_cdn.admin.inc',
+		'weight' => 0,
+	);
+	$items['admin/config/system/cdn_settings/caching'] = array(
+		'title' => 'AWS Cloudfront',
+		'description' => 'View and Invalidate CDN Caches',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('aws_cloudfront_cdn_settings'),
+		'access arguments' => array('administer users'),
+		'type' => MENU_NORMAL_ITEM,
+		'file' => 'aws_cloudfront_cdn.admin.inc',
+		'weight' => 0,
+	);
+  
+	return $items;
+}
+
+/**
+ *  Implements hook_theme().
+ *
+ *  @return Array
+ */
+function aws_cloudfront_cdn_theme($existing, $type, $theme, $path) {
+  return array(
+    "aws_cloudfront_cdn_invalidated_nodes" => array(
+      "variables" => array("paths"),
+      "template" => "invalidated-nodes",
+      "path" => $path . "/templates",
+    ),
+    "aws_cloudfront_cdn_invalidations" => array(
+      "variables" => array("invalidations"),
+      "template" => "invalidations",
+      "path" => $path . "/templates",
+    ),
+    "aws_cloudfront_cdn_distributions" => array(
+      "variables" => array("invalidations"),
+      "template" => "distributions",
+      "path" => $path . "/templates",
+    ),
+  );
+}
