@@ -29,6 +29,7 @@ function aws_cloudfront_key_settings() {
   );
   return system_settings_form($form);
 }
+
 /**
  *  @return Array
  */
@@ -146,6 +147,7 @@ function _aws_cloudfront_cdn_invalidate() {
   }
 
 }
+
 /**
  *  Callback function to get the paths to files that have been updated
  *  since last invalidation request.
